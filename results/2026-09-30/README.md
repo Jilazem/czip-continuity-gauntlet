@@ -77,4 +77,3 @@ a transparent functional demo, not a statistical claim of universal memory
 or superiority over every competing memory system. A finite context window
 still exists, and both Czip and the rolling summary scored 8/8 at the
 615-message scale.
-
