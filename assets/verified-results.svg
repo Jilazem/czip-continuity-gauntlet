@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560" role="img" aria-labelledby="title desc">
+  <title id="title">Verified Czip Continuity Gauntlet results on one local GLM model</title>
+  <desc id="desc">At 615 messages Czip, rolling summary, and full history all scored eight of eight; last 24 messages scored one of eight. Czip used 71 thousand prompt tokens and full history 370 thousand. At 4015 messages across two seeds Czip scored sixteen of sixteen, last 24 messages two of sixteen.</desc>
+  <rect width="1100" height="560" rx="24" fill="#111d32"/>
+  <text x="48" y="56" fill="#f2f7ff" font-family="Arial,sans-serif" font-size="29" font-weight="700">Same local GLM. Different memory paths.</text>
+  <text x="48" y="83" fill="#b9c8d9" font-family="Arial,sans-serif" font-size="16">Grounded answers: exact answer + cited source message exposed to the model</text>
+  <g font-family="Arial,sans-serif">
+    <text x="48" y="132" fill="#f2f7ff" font-size="21" font-weight="700">615-message conversation · one seed</text>
+    <text x="430" y="158" fill="#aabbd0" font-size="13">0</text><text x="916" y="158" fill="#aabbd0" font-size="13">8/8</text>
+    <g font-size="17" fill="#dfe9f5">
+      <text x="48" y="195">Czip</text><text x="48" y="237">Rolling summary</text><text x="48" y="279">Full history</text><text x="48" y="321">Last 24 messages</text>
+    </g>
+    <rect x="430" y="176" width="470" height="23" rx="8" fill="#2a3e5b"/><rect x="430" y="218" width="470" height="23" rx="8" fill="#2a3e5b"/><rect x="430" y="260" width="470" height="23" rx="8" fill="#2a3e5b"/><rect x="430" y="302" width="470" height="23" rx="8" fill="#2a3e5b"/>
+    <rect x="430" y="176" width="470" height="23" rx="8" fill="#40d5af"/><rect x="430" y="218" width="470" height="23" rx="8" fill="#73aeff"/><rect x="430" y="260" width="470" height="23" rx="8" fill="#ae91ff"/><rect x="430" y="302" width="59" height="23" rx="8" fill="#e2aa68"/>
+    <g font-size="15" font-weight="700" fill="#f2f7ff"><text x="913" y="194">8/8</text><text x="913" y="236">8/8</text><text x="913" y="278">8/8</text><text x="913" y="320">1/8</text></g>
+    <g font-size="13" fill="#aebfd3"><text x="990" y="194">71k tokens</text><text x="990" y="236">88k</text><text x="990" y="278">370k</text><text x="990" y="320">16k</text></g>
+    <path d="M48 356 H1052" stroke="#35506e"/>
+    <text x="48" y="393" fill="#f2f7ff" font-size="21" font-weight="700">4,015-message conversation · two new seeds</text>
+    <g font-size="17" fill="#dfe9f5"><text x="48" y="438">Czip</text><text x="48" y="478">Last 24 messages</text></g>
+    <rect x="430" y="419" width="470" height="23" rx="8" fill="#2a3e5b"/><rect x="430" y="459" width="470" height="23" rx="8" fill="#2a3e5b"/>
+    <rect x="430" y="419" width="470" height="23" rx="8" fill="#40d5af"/><rect x="430" y="459" width="59" height="23" rx="8" fill="#e2aa68"/>
+    <g font-size="15" font-weight="700" fill="#f2f7ff"><text x="913" y="438">16/16</text><text x="913" y="478">2/16</text></g>
+    <text x="48" y="529" fill="#aebfd3" font-size="13">Synthetic benchmark · 2026-09-30 · full history and summary were not run on the 4,015-message corpora · native token count unverified</text>
+  </g>
+</svg>

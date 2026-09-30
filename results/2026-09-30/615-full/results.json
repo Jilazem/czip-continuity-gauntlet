@@ -1,0 +1,339 @@
+{
+  "schema": "czip-continuity-gauntlet/1",
+  "dataset_sha256": "cb9c60a876803e6fc07831afeba0014aad18c7605381961b8fb61c5f008fe97d",
+  "czip_sha256": null,
+  "harness_sha256": "a612f083d22d64bda66300ebdace2bc955500efbb58fd5d40773694fc9ed2542",
+  "model": "GLM-5.3-Flash-EXL3",
+  "endpoint": "local endpoint (redacted)",
+  "generated_at": "2026-09-30T05:11:37.974506+00:00",
+  "settings": {
+    "arms": [
+      "full"
+    ],
+    "tail_messages": 24,
+    "tool_budget": 6,
+    "max_output_tokens": 180,
+    "pack_mode": null,
+    "summary_chunk_messages": 24,
+    "summary_budget_chars": 4000,
+    "disable_thinking": true
+  },
+  "pack_stats": null,
+  "pack_seconds": null,
+  "summary_setup": null,
+  "results": [
+    {
+      "id": "early_exact",
+      "category": "early_exact",
+      "arm": "full",
+      "expected": "RB-QWHKS8W4",
+      "answer": "RB-QWHKS8W4",
+      "gold_evidence": [
+        1
+      ],
+      "cited_evidence": [
+        1
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217030,
+      "usage": {
+        "prompt_tokens": 46188,
+        "completion_tokens": 21
+      },
+      "latency_seconds": 31.465,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"RB-QWHKS8W4\",\"evidence\":[1]}",
+          "usage": {
+            "prompt_tokens": 46188,
+            "completion_tokens": 21,
+            "total_tokens": 46209,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "two_hop",
+      "category": "two_hop",
+      "arm": "full",
+      "expected": "ESC-5FTCNL43",
+      "answer": "ESC-5FTCNL43",
+      "gold_evidence": [
+        246,
+        247
+      ],
+      "cited_evidence": [
+        246,
+        247
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217061,
+      "usage": {
+        "prompt_tokens": 46193,
+        "completion_tokens": 25
+      },
+      "latency_seconds": 0.826,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"ESC-5FTCNL43\",\"evidence\":[246,247]}",
+          "usage": {
+            "prompt_tokens": 46193,
+            "completion_tokens": 25,
+            "total_tokens": 46218,
+            "prompt_tokens_details": {
+              "cached_tokens": 46144
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tool_evidence",
+      "category": "tool_evidence",
+      "arm": "full",
+      "expected": "SHA-BY9Q5UAB",
+      "answer": "SHA-BY9Q5UAB",
+      "gold_evidence": [
+        248
+      ],
+      "cited_evidence": [
+        248
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217057,
+      "usage": {
+        "prompt_tokens": 46193,
+        "completion_tokens": 23
+      },
+      "latency_seconds": 0.981,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"SHA-BY9Q5UAB\",\"evidence\":[248]}",
+          "usage": {
+            "prompt_tokens": 46193,
+            "completion_tokens": 23,
+            "total_tokens": 46216,
+            "prompt_tokens_details": {
+              "cached_tokens": 46144
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "superseded_region",
+      "category": "update",
+      "arm": "full",
+      "expected": "ap-southeast-2",
+      "answer": "ap-southeast-2",
+      "gold_evidence": [
+        369
+      ],
+      "cited_evidence": [
+        369
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217044,
+      "usage": {
+        "prompt_tokens": 46189,
+        "completion_tokens": 21
+      },
+      "latency_seconds": 0.997,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"ap-southeast-2\",\"evidence\":[369]}",
+          "usage": {
+            "prompt_tokens": 46189,
+            "completion_tokens": 21,
+            "total_tokens": 46210,
+            "prompt_tokens_details": {
+              "cached_tokens": 46144
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "revoked_fallback",
+      "category": "revocation",
+      "arm": "full",
+      "expected": "NO",
+      "answer": "NO",
+      "gold_evidence": [
+        370
+      ],
+      "cited_evidence": [
+        370
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217055,
+      "usage": {
+        "prompt_tokens": 46193,
+        "completion_tokens": 15
+      },
+      "latency_seconds": 0.815,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"NO\",\"evidence\":[370]}",
+          "usage": {
+            "prompt_tokens": 46193,
+            "completion_tokens": 15,
+            "total_tokens": 46208,
+            "prompt_tokens_details": {
+              "cached_tokens": 46144
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "reopened_issue",
+      "category": "temporal",
+      "arm": "full",
+      "expected": "OPEN",
+      "answer": "OPEN",
+      "gold_evidence": [
+        492
+      ],
+      "cited_evidence": [
+        492
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217060,
+      "usage": {
+        "prompt_tokens": 46196,
+        "completion_tokens": 16
+      },
+      "latency_seconds": 0.881,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"OPEN\",\"evidence\":[492]}",
+          "usage": {
+            "prompt_tokens": 46196,
+            "completion_tokens": 16,
+            "total_tokens": 46212,
+            "prompt_tokens_details": {
+              "cached_tokens": 46144
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "approval_boundary",
+      "category": "instruction",
+      "arm": "full",
+      "expected": "USER",
+      "answer": "USER",
+      "gold_evidence": [
+        493
+      ],
+      "cited_evidence": [
+        493
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217063,
+      "usage": {
+        "prompt_tokens": 46196,
+        "completion_tokens": 16
+      },
+      "latency_seconds": 0.953,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"USER\",\"evidence\":[493]}",
+          "usage": {
+            "prompt_tokens": 46196,
+            "completion_tokens": 16,
+            "total_tokens": 46212,
+            "prompt_tokens_details": {
+              "cached_tokens": 46144
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "unknown_pin",
+      "category": "abstention",
+      "arm": "full",
+      "expected": "UNKNOWN",
+      "answer": "UNKNOWN",
+      "gold_evidence": [],
+      "cited_evidence": [],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 217030,
+      "usage": {
+        "prompt_tokens": 46188,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.81,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 46188,
+            "completion_tokens": 14,
+            "total_tokens": 46202,
+            "prompt_tokens_details": {
+              "cached_tokens": 46144
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "full": {
+      "completed": 8,
+      "total": 8,
+      "accuracy": 1.0,
+      "grounded_accuracy": 1.0,
+      "tool_calls": 0,
+      "input_chars": 1736400,
+      "prompt_tokens": 369536,
+      "median_latency_seconds": 0.917
+    }
+  },
+  "publication": {
+    "redacted_fields": [
+      "endpoint"
+    ],
+    "local_source_results_sha256": "510b59a4a51d59863609feaa7ae3220569ca81a767babb9cf3a903310448f559",
+    "note": "Only the endpoint was redacted from this synthetic run copy."
+  }
+}

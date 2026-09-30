@@ -2,11 +2,11 @@
 
 [![Harness checks](https://github.com/Jilazem/czip-continuity-gauntlet/actions/workflows/ci.yml/badge.svg)](https://github.com/Jilazem/czip-continuity-gauntlet/actions/workflows/ci.yml)
 
-### Can one local model keep working after the conversation outgrows its window?
+### What happens when one local model's project conversation keeps growing?
 
 ![A finite model window compared with a searchable Czip archive](assets/continuity-gauntlet.svg)
 
-**One model. One long project. Three ways to remember it.** This repository
+**One model. One long project. Four ways to remember it.** This repository
 tests whether [Czip](https://github.com/Jilazem/Czip) can help a local model
 recover the *right* fact, decision, and source from a growing engineering
 conversation. It measures the **model plus memory system**, not the model's
@@ -14,6 +14,24 @@ native context length.
 
 > A good result is not “I found a secret string.” It is “I found the current
 > decision, rejected its obsolete version, and can show the original message.”
+
+## Verified local run
+
+![Grounded accuracy and prompt-token comparison from the local GLM run](assets/verified-results.svg)
+
+On `GLM-5.3-Flash-EXL3`, the 615-message run scored **8/8** for Czip,
+rolling summary, and full history, and **1/8** for the last-24-message
+control. Czip used **71,243 prompt tokens** across the eight questions;
+full history used **369,536**. The summary used **88,171 including 26
+preparation calls**. On two more 4,015-message seeds, Czip scored **16/16**
+and the recent-message control **2/16**. The large histories have about
+**1.24 million characters** each; their exact GLM token count was not
+available. See the [full run notes and per-question JSON traces](results/2026-09-30/README.md).
+
+These are small, synthetic runs of one model and one template. The summary
+matched Czip's accuracy at the 615-message scale. The chart does not show
+summary or full-history scores at 4,015 messages because those arms were
+not run there.
 
 ## What the gauntlet asks
 
@@ -72,8 +90,8 @@ python bench.py run --dataset data/public-seed.json --out-dir runs/local-01 \
 ```
 
 The default generator makes **615 messages and 8 probes**. Increase
-`--filler-per-gap` to stress larger histories. Use multiple unpublished seeds
-for a public comparison; a single public seed is a smoke test.
+`--filler-per-gap` to stress larger histories. Use several seeds, including
+ones held back until the method is frozen, for any public comparison.
 
 For a server that requires a bearer token, set `CZCG_API_KEY` in your shell.
 The harness never prints the key. The endpoint may be local or remote, but
@@ -92,13 +110,9 @@ on one line or use PowerShell's backtick for line continuation.
 The report includes raw correctness, grounded correctness, retrieval calls,
 input characters, latency, and API token usage when the server supplies it.
 Errors and rejected overlength prompts remain in the denominator. The JSON
-also keeps each model/tool trace for auditing. Do not publish a percent without
-the dataset hash, Czip engine hash, model build, endpoint configuration,
-hardware, context limit, and all arm results.
-
-**No model result is claimed in this repository yet.** The tests verify the
-generator, grading rules, and a Czip full-pack/search/read round trip. A real
-model run is needed before a performance claim can be made.
+also keeps each model/tool trace for auditing. Publish dataset and engine
+hashes, model/build details, arm settings, and unknown hardware or context
+settings alongside any percentage.
 
 Run the local checks:
 

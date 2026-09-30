@@ -1,0 +1,1347 @@
+{
+  "schema": "czip-continuity-gauntlet/1",
+  "dataset_sha256": "b56342843efc1434fc094d2b464bb3169082447f33043e698fd0ef6a4f3bfa2e",
+  "czip_sha256": "a219624cc2e1b24af3d194c5bc7994ba4a226f7bf0e18eb87bb5feb99799347e",
+  "harness_sha256": "a612f083d22d64bda66300ebdace2bc955500efbb58fd5d40773694fc9ed2542",
+  "model": "GLM-5.3-Flash-EXL3",
+  "endpoint": "local endpoint (redacted)",
+  "generated_at": "2026-09-30T05:10:06.348491+00:00",
+  "settings": {
+    "arms": [
+      "czip",
+      "tail"
+    ],
+    "tail_messages": 24,
+    "tool_budget": 6,
+    "max_output_tokens": 180,
+    "pack_mode": "full",
+    "summary_chunk_messages": 24,
+    "summary_budget_chars": 4000,
+    "disable_thinking": true
+  },
+  "pack_stats": {
+    "ok": true,
+    "paket_bayt": 72640,
+    "kaynak_bayt": 1530756,
+    "oran": 21.1,
+    "mesaj": 4015,
+    "sozluk": 0,
+    "mod": "eksiksiz",
+    "eksik_bildirim": null,
+    "tekrar": 0,
+    "tekrar_bayt": 0,
+    "jev": null,
+    "parca": 101
+  },
+  "pack_seconds": 0.81,
+  "summary_setup": null,
+  "results": [
+    {
+      "id": "early_exact",
+      "category": "early_exact",
+      "arm": "czip",
+      "expected": "RB-HMSYN3DE",
+      "answer": "RB-HMSYN3DE",
+      "gold_evidence": [
+        1
+      ],
+      "cited_evidence": [
+        1
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 2,
+      "input_chars": 25761,
+      "usage": {
+        "prompt_tokens": 7300,
+        "completion_tokens": 63
+      },
+      "latency_seconds": 4.114,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION rollback code\"}",
+          "usage": {
+            "prompt_tokens": 1706,
+            "completion_tokens": 13,
+            "total_tokens": 1719,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION rollback code"
+          },
+          "result": [
+            {
+              "i": 1,
+              "rol": "user",
+              "eslesme": "For ORION only, the verified rollback code is RB-HMSYN3DE. The separate LYRA project uses RB-RFNYZQUR; never mix them."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"RB-HMSYN3DE\",\"evidence\":[1]}",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 20,
+            "total_tokens": 1814,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":1}",
+          "usage": {
+            "prompt_tokens": 1848,
+            "completion_tokens": 10,
+            "total_tokens": 1858,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 1
+          },
+          "result": {
+            "index": 1,
+            "messages": [
+              {
+                "rol": "user",
+                "icerik": "For ORION only, the verified rollback code is RB-HMSYN3DE. The separate LYRA project uses RB-RFNYZQUR; never mix them.",
+                "meta": {
+                  "id": 2,
+                  "timestamp": 1780000001
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"RB-HMSYN3DE\",\"evidence\":[1]}",
+          "usage": {
+            "prompt_tokens": 1952,
+            "completion_tokens": 20,
+            "total_tokens": 1972,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "two_hop",
+      "category": "two_hop",
+      "arm": "czip",
+      "expected": "ESC-JN7GAHTZ",
+      "answer": "ESC-JN7GAHTZ",
+      "gold_evidence": [
+        1606,
+        1607
+      ],
+      "cited_evidence": [
+        1606,
+        1607
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 5,
+      "input_chars": 47620,
+      "usage": {
+        "prompt_tokens": 13395,
+        "completion_tokens": 112
+      },
+      "latency_seconds": 5.598,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION Nimbus escalation code owner\"}",
+          "usage": {
+            "prompt_tokens": 1711,
+            "completion_tokens": 15,
+            "total_tokens": 1726,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION Nimbus escalation code owner"
+          },
+          "result": []
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"Nimbus\"}",
+          "usage": {
+            "prompt_tokens": 1747,
+            "completion_tokens": 11,
+            "total_tokens": 1758,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "Nimbus"
+          },
+          "result": [
+            {
+              "i": 1606,
+              "rol": "user",
+              "eslesme": "In ORION, the owner of the Nimbus component is the Delta operations team. This ownership link is authoritative."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"Delta operations team escalation code\"}",
+          "usage": {
+            "prompt_tokens": 1821,
+            "completion_tokens": 14,
+            "total_tokens": 1835,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "Delta operations team escalation code"
+          },
+          "result": [
+            {
+              "i": 1607,
+              "rol": "tool",
+              "eslesme": "Operations directory: Delta operations team -> escalation code ESC-JN7GAHTZ. Echo operations team -> escalation code ESC-LS4F9JQB."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"ESC-JN7GAHTZ\",\"evidence\":[1606,1607]}",
+          "usage": {
+            "prompt_tokens": 1908,
+            "completion_tokens": 25,
+            "total_tokens": 1933,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":1606}",
+          "usage": {
+            "prompt_tokens": 1972,
+            "completion_tokens": 11,
+            "total_tokens": 1983,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 1606
+          },
+          "result": {
+            "index": 1606,
+            "messages": [
+              {
+                "rol": "user",
+                "icerik": "In ORION, the owner of the Nimbus component is the Delta operations team. This ownership link is authoritative.",
+                "meta": {
+                  "id": 1607,
+                  "timestamp": 1780001606
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":1607}",
+          "usage": {
+            "prompt_tokens": 2066,
+            "completion_tokens": 11,
+            "total_tokens": 2077,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 1607
+          },
+          "result": {
+            "index": 1607,
+            "messages": [
+              {
+                "rol": "tool",
+                "icerik": "Operations directory: Delta operations team -> escalation code ESC-JN7GAHTZ. Echo operations team -> escalation code ESC-LS4F9JQB.",
+                "meta": {
+                  "id": 1608,
+                  "timestamp": 1780001607
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"ESC-JN7GAHTZ\",\"evidence\":[1606,1607]}",
+          "usage": {
+            "prompt_tokens": 2170,
+            "completion_tokens": 25,
+            "total_tokens": 2195,
+            "prompt_tokens_details": {
+              "cached_tokens": 2048
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tool_evidence",
+      "category": "tool_evidence",
+      "arm": "czip",
+      "expected": "SHA-2CE6QGG6",
+      "answer": "SHA-2CE6QGG6",
+      "gold_evidence": [
+        1608
+      ],
+      "cited_evidence": [
+        1608
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 2,
+      "input_chars": 25959,
+      "usage": {
+        "prompt_tokens": 7321,
+        "completion_tokens": 75
+      },
+      "latency_seconds": 2.746,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION release candidate 3 approved checksum label\"}",
+          "usage": {
+            "prompt_tokens": 1711,
+            "completion_tokens": 18,
+            "total_tokens": 1729,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION release candidate 3 approved checksum label"
+          },
+          "result": [
+            {
+              "i": 1608,
+              "rol": "tool",
+              "eslesme": "ORION artifact integrity report, release candidate 3: approved checksum label SHA-2CE6QGG6. LYRA is unrelated."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"SHA-2CE6QGG6\",\"evidence\":[1608]}",
+          "usage": {
+            "prompt_tokens": 1798,
+            "completion_tokens": 23,
+            "total_tokens": 1821,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":1608}",
+          "usage": {
+            "prompt_tokens": 1856,
+            "completion_tokens": 11,
+            "total_tokens": 1867,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 1608
+          },
+          "result": {
+            "index": 1608,
+            "messages": [
+              {
+                "rol": "tool",
+                "icerik": "ORION artifact integrity report, release candidate 3: approved checksum label SHA-2CE6QGG6. LYRA is unrelated.",
+                "meta": {
+                  "id": 1609,
+                  "timestamp": 1780001608
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"SHA-2CE6QGG6\",\"evidence\":[1608]}",
+          "usage": {
+            "prompt_tokens": 1956,
+            "completion_tokens": 23,
+            "total_tokens": 1979,
+            "prompt_tokens_details": {
+              "cached_tokens": 1856
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "superseded_region",
+      "category": "update",
+      "arm": "czip",
+      "expected": "ap-southeast-2",
+      "answer": "ap-southeast-2 (superseding the earlier eu-west-1 draft)",
+      "gold_evidence": [
+        2409
+      ],
+      "cited_evidence": [
+        2409
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 2,
+      "input_chars": 25964,
+      "usage": {
+        "prompt_tokens": 7316,
+        "completion_tokens": 89
+      },
+      "latency_seconds": 3.388,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION approved deployment region\"}",
+          "usage": {
+            "prompt_tokens": 1707,
+            "completion_tokens": 14,
+            "total_tokens": 1721,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION approved deployment region"
+          },
+          "result": [
+            {
+              "i": 2409,
+              "rol": "user",
+              "eslesme": "Correction to my earlier ORION region draft: the approved deployment region is ap-southeast-2. Supersede eu-west-1."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"ap-southeast-2 (superseding the earlier eu-west-1 draft)\",\"evidence\":[2409]}",
+          "usage": {
+            "prompt_tokens": 1791,
+            "completion_tokens": 32,
+            "total_tokens": 1823,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":2409}",
+          "usage": {
+            "prompt_tokens": 1858,
+            "completion_tokens": 11,
+            "total_tokens": 1869,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 2409
+          },
+          "result": {
+            "index": 2409,
+            "messages": [
+              {
+                "rol": "user",
+                "icerik": "Correction to my earlier ORION region draft: the approved deployment region is ap-southeast-2. Supersede eu-west-1.",
+                "meta": {
+                  "id": 2410,
+                  "timestamp": 1780002409
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"ap-southeast-2 (superseding the earlier eu-west-1 draft)\",\"evidence\":[2409]}",
+          "usage": {
+            "prompt_tokens": 1960,
+            "completion_tokens": 32,
+            "total_tokens": 1992,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "revoked_fallback",
+      "category": "revocation",
+      "arm": "czip",
+      "expected": "NO",
+      "answer": "NO",
+      "gold_evidence": [
+        2410
+      ],
+      "cited_evidence": [
+        2410
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 2,
+      "input_chars": 26295,
+      "usage": {
+        "prompt_tokens": 7416,
+        "completion_tokens": 59
+      },
+      "latency_seconds": 3.117,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION cloud fallback\"}",
+          "usage": {
+            "prompt_tokens": 1711,
+            "completion_tokens": 13,
+            "total_tokens": 1724,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION cloud fallback"
+          },
+          "result": [
+            {
+              "i": 804,
+              "rol": "user",
+              "eslesme": "yping, a cloud fallback was allowed for ORION image processing. Revisit before release."
+            },
+            {
+              "i": 2410,
+              "rol": "user",
+              "eslesme": "Final ORION release rule: cloud fallback is forbidden, even if a local provider times out. This supersedes the prototype rule."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"NO\",\"evidence\":[2410]}",
+          "usage": {
+            "prompt_tokens": 1832,
+            "completion_tokens": 17,
+            "total_tokens": 1849,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":2410}",
+          "usage": {
+            "prompt_tokens": 1885,
+            "completion_tokens": 12,
+            "total_tokens": 1897,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 2410
+          },
+          "result": {
+            "index": 2410,
+            "messages": [
+              {
+                "rol": "user",
+                "icerik": "Final ORION release rule: cloud fallback is forbidden, even if a local provider times out. This supersedes the prototype rule.",
+                "meta": {
+                  "id": 2411,
+                  "timestamp": 1780002410
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"NO\",\"evidence\":[2410]}",
+          "usage": {
+            "prompt_tokens": 1988,
+            "completion_tokens": 17,
+            "total_tokens": 2005,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "reopened_issue",
+      "category": "temporal",
+      "arm": "czip",
+      "expected": "OPEN",
+      "answer": "OPEN",
+      "gold_evidence": [
+        3212
+      ],
+      "cited_evidence": [
+        3212
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 3,
+      "input_chars": 25914,
+      "usage": {
+        "prompt_tokens": 7358,
+        "completion_tokens": 57
+      },
+      "latency_seconds": 3.044,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORI-42 incident status\"}",
+          "usage": {
+            "prompt_tokens": 1714,
+            "completion_tokens": 15,
+            "total_tokens": 1729,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORI-42 incident status"
+          },
+          "result": []
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORI-42\"}",
+          "usage": {
+            "prompt_tokens": 1750,
+            "completion_tokens": 13,
+            "total_tokens": 1763,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORI-42"
+          },
+          "result": [
+            {
+              "i": 805,
+              "rol": "user",
+              "eslesme": "Incident ORI-42 is OPEN while the checksum is being checked."
+            },
+            {
+              "i": 2411,
+              "rol": "user",
+              "eslesme": "Incident ORI-42 is CLOSED after checksum review."
+            },
+            {
+              "i": 3212,
+              "rol": "user",
+              "eslesme": "Update: incident ORI-42 has REOPENED because the final deployment check failed. Treat it as OPEN now."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":3212}",
+          "usage": {
+            "prompt_tokens": 1897,
+            "completion_tokens": 12,
+            "total_tokens": 1909,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 3212
+          },
+          "result": {
+            "index": 3212,
+            "messages": [
+              {
+                "rol": "user",
+                "icerik": "Update: incident ORI-42 has REOPENED because the final deployment check failed. Treat it as OPEN now.",
+                "meta": {
+                  "id": 3213,
+                  "timestamp": 1780003212
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"OPEN\",\"evidence\":[3212]}",
+          "usage": {
+            "prompt_tokens": 1997,
+            "completion_tokens": 17,
+            "total_tokens": 2014,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "approval_boundary",
+      "category": "instruction",
+      "arm": "czip",
+      "expected": "USER",
+      "answer": "USER",
+      "gold_evidence": [
+        3213
+      ],
+      "cited_evidence": [
+        3213
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 2,
+      "input_chars": 25930,
+      "usage": {
+        "prompt_tokens": 7302,
+        "completion_tokens": 60
+      },
+      "latency_seconds": 2.825,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION release approval PIN\"}",
+          "usage": {
+            "prompt_tokens": 1714,
+            "completion_tokens": 14,
+            "total_tokens": 1728,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION release approval PIN"
+          },
+          "result": [
+            {
+              "i": 3213,
+              "rol": "user",
+              "eslesme": "ORION release approval must be entered by the user on their own phone. The assistant may never enter the approval PIN."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"USER\",\"evidence\":[3213]}",
+          "usage": {
+            "prompt_tokens": 1794,
+            "completion_tokens": 17,
+            "total_tokens": 1811,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":3213}",
+          "usage": {
+            "prompt_tokens": 1847,
+            "completion_tokens": 12,
+            "total_tokens": 1859,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 3213
+          },
+          "result": {
+            "index": 3213,
+            "messages": [
+              {
+                "rol": "user",
+                "icerik": "ORION release approval must be entered by the user on their own phone. The assistant may never enter the approval PIN.",
+                "meta": {
+                  "id": 3214,
+                  "timestamp": 1780003213
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"USER\",\"evidence\":[3213]}",
+          "usage": {
+            "prompt_tokens": 1947,
+            "completion_tokens": 17,
+            "total_tokens": 1964,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "unknown_pin",
+      "category": "abstention",
+      "arm": "czip",
+      "expected": "UNKNOWN",
+      "answer": "UNKNOWN",
+      "gold_evidence": [],
+      "cited_evidence": [
+        3213
+      ],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 6,
+      "input_chars": 55222,
+      "usage": {
+        "prompt_tokens": 15596,
+        "completion_tokens": 101
+      },
+      "latency_seconds": 6.318,
+      "trace": [
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION release approval PIN\"}",
+          "usage": {
+            "prompt_tokens": 1706,
+            "completion_tokens": 14,
+            "total_tokens": 1720,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION release approval PIN"
+          },
+          "result": [
+            {
+              "i": 3213,
+              "rol": "user",
+              "eslesme": "ORION release approval must be entered by the user on their own phone. The assistant may never enter the approval PIN."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"read\",\"index\":3213}",
+          "usage": {
+            "prompt_tokens": 1786,
+            "completion_tokens": 12,
+            "total_tokens": 1798,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "read",
+            "index": 3213
+          },
+          "result": {
+            "index": 3213,
+            "messages": [
+              {
+                "rol": "user",
+                "icerik": "ORION release approval must be entered by the user on their own phone. The assistant may never enter the approval PIN.",
+                "meta": {
+                  "id": 3214,
+                  "timestamp": 1780003213
+                }
+              }
+            ]
+          }
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION PIN code number\"}",
+          "usage": {
+            "prompt_tokens": 1886,
+            "completion_tokens": 14,
+            "total_tokens": 1900,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "ORION PIN code number"
+          },
+          "result": []
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"approval PIN digits\"}",
+          "usage": {
+            "prompt_tokens": 1921,
+            "completion_tokens": 12,
+            "total_tokens": 1933,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "approval PIN digits"
+          },
+          "result": []
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"PIN\"}",
+          "usage": {
+            "prompt_tokens": 1954,
+            "completion_tokens": 10,
+            "total_tokens": 1964,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "PIN"
+          },
+          "result": [
+            {
+              "i": 804,
+              "rol": "user",
+              "eslesme": "During early prototyping, a cloud fallback was allowed for ORION image processing. Revisit before release."
+            },
+            {
+              "i": 3213,
+              "rol": "user",
+              "eslesme": " assistant may never enter the approval PIN."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"release approval\"}",
+          "usage": {
+            "prompt_tokens": 2055,
+            "completion_tokens": 11,
+            "total_tokens": 2066,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664
+            }
+          }
+        },
+        {
+          "tool": {
+            "action": "search",
+            "query": "release approval"
+          },
+          "result": [
+            {
+              "i": 3213,
+              "rol": "user",
+              "eslesme": "ORION release approval must be entered by the user on their own phone. The assistant may never enter the approval PIN."
+            }
+          ]
+        },
+        {
+          "model": "{\"action\":\"search\",\"query\":\"ORION\"}",
+          "usage": {
+            "prompt_tokens": 2132,
+            "completion_tokens": 11,
+            "total_tokens": 2143,
+            "prompt_tokens_details": {
+              "cached_tokens": 2048
+            }
+          }
+        },
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[3213]}",
+          "usage": {
+            "prompt_tokens": 2156,
+            "completion_tokens": 17,
+            "total_tokens": 2173,
+            "prompt_tokens_details": {
+              "cached_tokens": 2048
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "early_exact",
+      "category": "early_exact",
+      "arm": "tail",
+      "expected": "RB-HMSYN3DE",
+      "answer": "UNKNOWN",
+      "gold_evidence": [
+        1
+      ],
+      "cited_evidence": [],
+      "correct": false,
+      "evidence_ok": false,
+      "grounded": false,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9082,
+      "usage": {
+        "prompt_tokens": 1979,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 2.054,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1979,
+            "completion_tokens": 14,
+            "total_tokens": 1993,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "two_hop",
+      "category": "two_hop",
+      "arm": "tail",
+      "expected": "ESC-JN7GAHTZ",
+      "answer": "UNKNOWN",
+      "gold_evidence": [
+        1606,
+        1607
+      ],
+      "cited_evidence": [],
+      "correct": false,
+      "evidence_ok": false,
+      "grounded": false,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9113,
+      "usage": {
+        "prompt_tokens": 1984,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.689,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1984,
+            "completion_tokens": 14,
+            "total_tokens": 1998,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "tool_evidence",
+      "category": "tool_evidence",
+      "arm": "tail",
+      "expected": "SHA-2CE6QGG6",
+      "answer": "UNKNOWN",
+      "gold_evidence": [
+        1608
+      ],
+      "cited_evidence": [],
+      "correct": false,
+      "evidence_ok": false,
+      "grounded": false,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9109,
+      "usage": {
+        "prompt_tokens": 1984,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.651,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1984,
+            "completion_tokens": 14,
+            "total_tokens": 1998,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "superseded_region",
+      "category": "update",
+      "arm": "tail",
+      "expected": "ap-southeast-2",
+      "answer": "UNKNOWN",
+      "gold_evidence": [
+        2409
+      ],
+      "cited_evidence": [],
+      "correct": false,
+      "evidence_ok": false,
+      "grounded": false,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9096,
+      "usage": {
+        "prompt_tokens": 1980,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.652,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1980,
+            "completion_tokens": 14,
+            "total_tokens": 1994,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "revoked_fallback",
+      "category": "revocation",
+      "arm": "tail",
+      "expected": "NO",
+      "answer": "UNKNOWN",
+      "gold_evidence": [
+        2410
+      ],
+      "cited_evidence": [],
+      "correct": false,
+      "evidence_ok": false,
+      "grounded": false,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9107,
+      "usage": {
+        "prompt_tokens": 1984,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.593,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1984,
+            "completion_tokens": 14,
+            "total_tokens": 1998,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "reopened_issue",
+      "category": "temporal",
+      "arm": "tail",
+      "expected": "OPEN",
+      "answer": "UNKNOWN",
+      "gold_evidence": [
+        3212
+      ],
+      "cited_evidence": [],
+      "correct": false,
+      "evidence_ok": false,
+      "grounded": false,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9112,
+      "usage": {
+        "prompt_tokens": 1987,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.664,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1987,
+            "completion_tokens": 14,
+            "total_tokens": 2001,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "approval_boundary",
+      "category": "instruction",
+      "arm": "tail",
+      "expected": "USER",
+      "answer": "UNKNOWN",
+      "gold_evidence": [
+        3213
+      ],
+      "cited_evidence": [],
+      "correct": false,
+      "evidence_ok": false,
+      "grounded": false,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9115,
+      "usage": {
+        "prompt_tokens": 1987,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.687,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1987,
+            "completion_tokens": 14,
+            "total_tokens": 2001,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "unknown_pin",
+      "category": "abstention",
+      "arm": "tail",
+      "expected": "UNKNOWN",
+      "answer": "UNKNOWN",
+      "gold_evidence": [],
+      "cited_evidence": [],
+      "correct": true,
+      "evidence_ok": true,
+      "grounded": true,
+      "evidence_read": true,
+      "tool_calls": 0,
+      "input_chars": 9082,
+      "usage": {
+        "prompt_tokens": 1979,
+        "completion_tokens": 14
+      },
+      "latency_seconds": 0.711,
+      "trace": [
+        {
+          "model": "{\"action\":\"answer\",\"answer\":\"UNKNOWN\",\"evidence\":[]}",
+          "usage": {
+            "prompt_tokens": 1979,
+            "completion_tokens": 14,
+            "total_tokens": 1993,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "czip": {
+      "completed": 8,
+      "total": 8,
+      "accuracy": 1.0,
+      "grounded_accuracy": 1.0,
+      "tool_calls": 24,
+      "input_chars": 258665,
+      "prompt_tokens": 73004,
+      "median_latency_seconds": 3.252
+    },
+    "tail": {
+      "completed": 8,
+      "total": 8,
+      "accuracy": 0.125,
+      "grounded_accuracy": 0.125,
+      "tool_calls": 0,
+      "input_chars": 72816,
+      "prompt_tokens": 15864,
+      "median_latency_seconds": 0.675
+    }
+  },
+  "publication": {
+    "redacted_fields": [
+      "endpoint"
+    ],
+    "local_source_results_sha256": "b0b5a3de3252fbbb96c47254d4fd975487f2dd42ee1e49a950ac959061d84cea",
+    "note": "Only the endpoint was redacted from this synthetic run copy."
+  }
+}
