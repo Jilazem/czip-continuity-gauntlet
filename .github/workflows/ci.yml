@@ -1,0 +1,30 @@
+name: Harness checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: benchmark
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: Jilazem/Czip
+          ref: 6a2273fa53069c2dd2b436cc69c839f9fb03afb8
+          path: Czip
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Test the generator, scorer, Czip round trip, and CLI
+        working-directory: benchmark
+        run: python -m unittest discover -s tests -v
+

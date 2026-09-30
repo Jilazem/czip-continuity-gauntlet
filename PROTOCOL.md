@@ -18,7 +18,7 @@ context or an ability unique to Czip.
 - Run `czip`, `summary`, and `tail`. Add `full` only if the entire history fits;
   report context-overflow errors as failures, not silently omitted rows.
 - Set and disclose `--tail-messages`, `--summary-budget-chars`,
-  `--summary-chunk-messages`, and `--tool-budget`.
+  `--summary-chunk-messages`, `--tool-budget`, and `--disable-thinking`.
 - Run at least three seeds, including one generated after the method was
   frozen. Keep the generation command and dataset SHA-256 for every run.
 - Do not tune Czip search prompts on the evaluation seeds and then describe
@@ -46,4 +46,3 @@ is a functional benchmark and demo. The `two_hop` item requires two source
 messages; the update and revocation items intentionally include conflicting
 history. Good performance on one seed is a reason to scale the experiment,
 not a claim of universal memory or superiority over every other model.
-

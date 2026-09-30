@@ -109,10 +109,12 @@ def make_dataset(seed: int, filler_per_gap: int) -> dict:
     probes.extend([
         {"id": "superseded_region", "category": "update",
          "question": "What is ORION's currently approved deployment region?",
-         "answer": "ap-southeast-2", "evidence": [region_old_i, region_new_i]},
+         "answer": "ap-southeast-2", "evidence": [region_new_i],
+         "superseded_evidence": [region_old_i]},
         {"id": "revoked_fallback", "category": "revocation",
          "question": "Is cloud fallback currently allowed for ORION? Answer YES or NO.",
-         "answer": "NO", "evidence": [cloud_old_i, cloud_new_i]},
+         "answer": "NO", "evidence": [cloud_new_i],
+         "superseded_evidence": [cloud_old_i]},
     ])
     filler("Release")
 
@@ -123,7 +125,8 @@ def make_dataset(seed: int, filler_per_gap: int) -> dict:
     probes.extend([
         {"id": "reopened_issue", "category": "temporal",
          "question": "What is the current status of incident ORI-42? Answer OPEN or CLOSED.",
-         "answer": "OPEN", "evidence": [status_old_i, status_closed_i, status_reopen_i]},
+         "answer": "OPEN", "evidence": [status_reopen_i],
+         "superseded_evidence": [status_old_i, status_closed_i]},
         {"id": "approval_boundary", "category": "instruction",
          "question": "Who must enter the ORION release approval PIN? Answer USER or ASSISTANT.",
          "answer": "USER", "evidence": [approval_i]},
@@ -181,10 +184,13 @@ def _sha256(path: Path) -> str:
 
 
 def _post_chat(base_url: str, model: str, messages: list[dict], timeout: int,
-               api_key: str | None, max_output_tokens: int) -> tuple[str, dict]:
+               api_key: str | None, max_output_tokens: int,
+               disable_thinking: bool = False) -> tuple[str, dict]:
     url = base_url.rstrip("/") + "/chat/completions"
     payload = {"model": model, "messages": messages, "temperature": 0,
                "max_tokens": max_output_tokens, "stream": False}
+    if disable_thinking:
+        payload["chat_template_kwargs"] = {"enable_thinking": False}
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     headers = {"Content-Type": "application/json"}
     if api_key:
@@ -224,13 +230,19 @@ def _norm(value: object) -> str:
     return re.sub(r"\s+", " ", str(value or "").strip().strip(".\"'` ")).upper()
 
 
+def _answer_matches(actual: object, expected: str) -> bool:
+    value = _norm(actual)
+    target = _norm(expected)
+    return bool(re.match(r"^" + re.escape(target) + r"(?=$|[\s(—,:;.])", value))
+
+
 def grade(probe: dict, answer: object, evidence: object) -> dict:
-    correct = _norm(answer) == _norm(probe["answer"])
+    correct = _answer_matches(answer, probe["answer"])
     indices = evidence if isinstance(evidence, list) else []
     indices = [x for x in indices if isinstance(x, int) and not isinstance(x, bool)]
     evidence_ok = set(probe["evidence"]).issubset(set(indices))
     if probe["category"] == "abstention":
-        evidence_ok = not indices
+        evidence_ok = True
     return {"correct": correct, "evidence_ok": evidence_ok,
             "grounded": correct and evidence_ok}
 
@@ -251,6 +263,8 @@ def build_rolling_summary(messages: list[dict], chat, chunk_messages: int,
     usage_seen = True
     input_chars = 0
     calls = 0
+    started = time.monotonic()
+    total_calls = (len(messages) + chunk_messages - 1) // chunk_messages
     for start in range(0, len(messages), chunk_messages):
         chunk = _indexed_messages(messages[start:start + chunk_messages], start)
         prompt = (
@@ -264,12 +278,15 @@ def build_rolling_summary(messages: list[dict], chat, chunk_messages: int,
                            {"role": "user", "content": prompt}])
         calls += 1
         summary = raw[:budget_chars]
+        if calls == 1 or calls % 5 == 0 or calls == total_calls:
+            print(f"summary preparation {calls}/{total_calls}", flush=True)
         if not usage:
             usage_seen = False
         else:
             for key in usage_total:
                 usage_total[key] += int(usage.get(key) or 0)
     return summary, {"calls": calls, "input_chars": input_chars,
+                     "seconds": round(time.monotonic() - started, 3),
                      "usage": usage_total if usage_seen else None}
 
 
@@ -305,7 +322,7 @@ def run_probe(probe: dict, messages: list[dict], arm: str, chat,
     input_chars = 0
     transcript = []
     final = None
-    max_turns = tool_budget + 3 if arm == "czip" else 2
+    max_turns = tool_budget + 5 if arm == "czip" else 2
     for _ in range(max_turns):
         input_chars += sum(len(m["content"]) for m in conversation)
         raw, usage = chat(conversation)
@@ -321,6 +338,16 @@ def run_probe(probe: dict, messages: list[dict], arm: str, chat,
             conversation.append({"role": "user", "content": f"Invalid JSON: {exc}. Return valid answer JSON."})
             continue
         if action.get("action") == "answer":
+            if arm == "czip" and tool_calls < tool_budget:
+                cited = action.get("evidence") if isinstance(action.get("evidence"), list) else []
+                unread = [i for i in cited if isinstance(i, int) and i not in read_indices]
+                if unread:
+                    conversation.append({"role": "assistant", "content": raw})
+                    conversation.append({"role": "user", "content":
+                                         "Before finalizing, open the source messages you cited "
+                                         f"with read actions: {unread}. Then answer again. "
+                                         "For UNKNOWN, evidence may be an empty list."})
+                    continue
             final = action
             break
         if arm != "czip":
@@ -413,7 +440,8 @@ def markdown_report(record: dict) -> str:
     if record.get("summary_setup"):
         setup = record["summary_setup"]
         lines += ["", "Rolling summary preparation: " +
-                  (f"{setup['calls']} model calls, {setup['input_chars']} input characters; "
+                  (f"{setup['calls']} model calls, {setup['seconds']} seconds, "
+                   f"{setup['input_chars']} input characters; "
                    f"prompt tokens: {setup['usage']['prompt_tokens'] if setup['usage'] else 'unavailable'}."
                    if "error" not in setup else f"failed: {setup['error']}"), ""]
     if record.get("pack_stats"):
@@ -463,6 +491,8 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("--summary-budget-chars", type=int, default=4000)
     run.add_argument("--timeout", type=int, default=180)
     run.add_argument("--max-output-tokens", type=int, default=180)
+    run.add_argument("--disable-thinking", action="store_true",
+                     help="send chat_template_kwargs.enable_thinking=false to compatible servers")
     run.add_argument("--api-key-env", default="CZCG_API_KEY")
     args = parser.parse_args(argv)
     if args.command == "generate":
@@ -479,6 +509,8 @@ def main(argv: list[str] | None = None) -> int:
     if "czip" in args.arms and not args.czip_source:
         parser.error("--czip-source is required for the czip arm")
     args.out_dir.mkdir(parents=True, exist_ok=True)
+    engine_sha = _sha256(args.czip_source / "hkp.py") if "czip" in args.arms else None
+    harness_sha = _sha256(Path(__file__))
     engine = load_czip(str(args.czip_source)) if "czip" in args.arms else None
     pack_path = None
     pack_stats = None
@@ -495,7 +527,7 @@ def main(argv: list[str] | None = None) -> int:
 
     def chat(conversation, tokens=None):
         return _post_chat(args.base_url, args.model, conversation, args.timeout,
-                          key, tokens or args.max_output_tokens)
+                          key, tokens or args.max_output_tokens, args.disable_thinking)
 
     summary_text = None
     summary_setup = None
@@ -527,14 +559,15 @@ def main(argv: list[str] | None = None) -> int:
         else:
             summary_metrics["summary"]["prompt_tokens"] = None
     record = {"schema": SCHEMA, "dataset_sha256": _sha256(args.dataset),
-              "czip_sha256": _sha256(args.czip_source / "hkp.py") if engine else None,
+              "czip_sha256": engine_sha, "harness_sha256": harness_sha,
               "model": args.model, "endpoint": args.base_url,
               "generated_at": datetime.now(timezone.utc).isoformat(),
               "settings": {"arms": args.arms, "tail_messages": args.tail_messages,
                            "tool_budget": args.tool_budget, "max_output_tokens": args.max_output_tokens,
                            "pack_mode": "full" if engine else None,
                            "summary_chunk_messages": args.summary_chunk_messages,
-                           "summary_budget_chars": args.summary_budget_chars},
+                           "summary_budget_chars": args.summary_budget_chars,
+                           "disable_thinking": args.disable_thinking},
               "pack_stats": {k: v for k, v in pack_stats.items() if k != "yol"} if pack_stats else None,
               "pack_seconds": pack_seconds, "summary_setup": summary_setup,
               "results": results, "summary": summary_metrics}

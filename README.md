@@ -1,5 +1,7 @@
 # Czip Continuity Gauntlet
 
+[![Harness checks](https://github.com/Jilazem/czip-continuity-gauntlet/actions/workflows/ci.yml/badge.svg)](https://github.com/Jilazem/czip-continuity-gauntlet/actions/workflows/ci.yml)
+
 ### Can one local model keep working after the conversation outgrows its window?
 
 ![A finite model window compared with a searchable Czip archive](assets/continuity-gauntlet.svg)
@@ -78,6 +80,10 @@ The harness never prints the key. The endpoint may be local or remote, but
 the **local-only** claim applies only if the configured endpoint stays local
 and does not route requests elsewhere.
 
+For GLM servers that support `chat_template_kwargs`, add
+`--disable-thinking` to keep the finite output budget for the final JSON
+answer. Use the same setting for every arm and disclose it in the report.
+
 Windows PowerShell uses the same Python commands; put each `python` command
 on one line or use PowerShell's backtick for line continuation.
 
@@ -128,4 +134,3 @@ anyone can inspect and rerun. It is not a replacement for those datasets.
 
 Harness code: MIT. Czip itself has its own license; see the
 [Czip license](https://github.com/Jilazem/Czip/blob/main/LICENSE).
-

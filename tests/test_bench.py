@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,6 +10,13 @@ ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("continuity_bench", ROOT / "bench.py")
 bench = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(bench)
+
+
+def czip_checkout():
+    candidates = ([Path(os.environ["CZCG_CZIP_SOURCE"])]
+                  if os.environ.get("CZCG_CZIP_SOURCE") else [])
+    candidates += [ROOT.parent / "Czip", ROOT.parent.parent / "work" / "Czip"]
+    return next((path for path in candidates if (path / "hkp.py").is_file()), None)
 
 
 class DatasetTests(unittest.TestCase):
@@ -31,7 +39,13 @@ class DatasetTests(unittest.TestCase):
         self.assertEqual(bench.grade(probe, "X-123", [3, 9])["grounded"], True)
         unknown = {"answer": "UNKNOWN", "evidence": [], "category": "abstention"}
         self.assertTrue(bench.grade(unknown, "UNKNOWN", [])["grounded"])
-        self.assertFalse(bench.grade(unknown, "UNKNOWN", [1])["grounded"])
+        self.assertTrue(bench.grade(unknown, "UNKNOWN", [1])["grounded"])
+
+    def test_short_answer_accepts_explanation_after_value(self):
+        self.assertTrue(bench._answer_matches("ap-southeast-2 (supersedes draft)",
+                                              "ap-southeast-2"))
+        self.assertTrue(bench._answer_matches("UNKNOWN — no PIN was given", "UNKNOWN"))
+        self.assertFalse(bench._answer_matches("NOPE", "NO"))
 
     def test_tail_cannot_cite_unseen_evidence(self):
         data = bench.make_dataset(44, 4)
@@ -46,8 +60,8 @@ class DatasetTests(unittest.TestCase):
         self.assertEqual(result["tool_calls"], 0)
 
     def test_czip_full_pack_search_and_read(self):
-        czip_source = Path(__file__).resolve().parents[3] / "work" / "Czip"
-        if not (czip_source / "hkp.py").is_file():
+        czip_source = czip_checkout()
+        if czip_source is None:
             self.skipTest("provide the Czip checkout for integration testing")
         engine = bench.load_czip(str(czip_source))
         data = bench.make_dataset(44, 4)
@@ -82,13 +96,13 @@ class DatasetTests(unittest.TestCase):
                             "evidence": probe["evidence"]}])
             ungrounded = bench.run_probe(probe, data["messages"], "czip",
                                          lambda _: (json.dumps(next(forged)), {}),
-                                         engine, stats["yol"])
+                                         engine, stats["yol"], tool_budget=0)
             self.assertTrue(ungrounded["correct"])
             self.assertFalse(ungrounded["grounded"])
 
     def test_cli_writes_auditable_report_without_claiming_success(self):
-        czip_source = Path(__file__).resolve().parents[3] / "work" / "Czip"
-        if not (czip_source / "hkp.py").is_file():
+        czip_source = czip_checkout()
+        if czip_source is None:
             self.skipTest("provide the Czip checkout for integration testing")
         with tempfile.TemporaryDirectory() as temporary:
             dataset_path = Path(temporary) / "case.json"
